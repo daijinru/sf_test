@@ -4,14 +4,18 @@ var timeout = require('connect-timeout');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var todos = require('./routes/todos');
 var AV = require('leanengine');
 
+var swig = require('swig');
 var app = express();
+
+var index = require('./routes/index');
 
 // 设置模板引擎
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
+app.set('view engine', 'tpl');
+app.engine('tpl', swig.renderFile);
 app.use(express.static('public'));
 
 // 设置默认超时时间
@@ -26,12 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.get('/', function(req, res) {
-  res.render('index', { currentTime: new Date() });
-});
-
-// 可以将一类的路由单独保存在一个文件中
-app.use('/todos', todos);
+app.use('/',index);
 
 app.use(function(req, res, next) {
   // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
