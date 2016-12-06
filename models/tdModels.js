@@ -6,13 +6,6 @@ var AV = require('leanengine');
 var Todo = AV.Object.extend('Todo');
 
 var TD = {
-	index:function(req,res,next){
-		var currentTime = new Date().getTime();
-		res.render('index',{
-			title:'sf',
-			currentTime: currentTime
-		})
-	},
 	// 查询 Todo
     ask: function(req, res, next) {
         var query = new AV.Query(Todo);
