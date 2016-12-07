@@ -1,5 +1,5 @@
 # leanCloud started
 
 ```
-:smile: nothing more now
+☀️ nothing more now
 ```
