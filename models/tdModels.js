@@ -6,6 +6,11 @@ var AV = require('leanengine');
 var Todo = AV.Object.extend('Todo');
 
 var TD = {
+    verify:function(req,res,next){
+        res.render('verify',{
+            title:'loading'
+        })
+    },
 	// 查询 Todo
     ask: function(req, res, next) {
         var query = new AV.Query(Todo);
